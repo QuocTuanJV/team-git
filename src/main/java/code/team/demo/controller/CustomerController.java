@@ -32,6 +32,17 @@ public class CustomerController {
             customerService.delete(id);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+        @GetMapping("/list-customer")
+        public ResponseEntity<Iterable<Customer>> getCustomer() {
+            Iterable<Customer> customers = customerService.findAll();
+            return new ResponseEntity<Iterable<Customer>>(customers, HttpStatus.OK);
+        }
+
+        @PostMapping("/create-customer")
+        public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer){
+            Customer customerInsert = customerService.save(customer);
+            return new ResponseEntity<>(customerInsert, HttpStatus.CREATED);
 
     }
 }
